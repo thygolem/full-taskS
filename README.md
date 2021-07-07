@@ -6,6 +6,11 @@ Description:	Ubuntu 20.04.2 LTS
 Release:	20.04
 Codename:	focal
 
+
+Basado en el tutorial de FaztWeb
+https://www.youtube.com/watch?v=D1W8H4Rkb9A
+Python Flask, React Hooks & MongoDB CRUD
+
 Para seguir los pasos, en Github, ir a commits y copiar el código del commit,
 
 $ git reset --hard [código_del_commit]
