@@ -2,13 +2,21 @@ from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo, ObjectId
 from flask_cors import CORS
 
+# Creación de app Flask
 app = Flask(__name__)
+
+#conexxión con mongo y creación de basede datos
 app.config['MONGO_URI']='mongodb://localhost/pythonreactdb'
 mongo = PyMongo(app)
 
+# Solución para los middlewares entre Flask y React
+# para crear la conexxión entre los dos servidores
+CORS(app)
+
+#creación de collección
 db = mongo.db.users
 
-# Routes
+# Rutas HTTP
 @app.route('/users', methods=['POST'])
 def createUser():
   print(request.json)
@@ -70,7 +78,7 @@ def updateUser(id):
 
 
 
-
+# Simple server
 if __name__ == '__main__':
     app.run(debug=True)
 

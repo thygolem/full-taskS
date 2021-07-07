@@ -21,6 +21,9 @@ $ git reset --hard [código_del_commit]
 -
 -
 
+
+- - - - - - BACKEND - - - - - -
+
 Para probar la API de FLASK, usamos POSTMAN:
 
 ejemplo1:
@@ -44,3 +47,13 @@ $ mongo ------- En otros SO puede ser "$ mongod"
 > db.users.find().pretty()
 
 Se recomienda igualmente usar mongo compass.
+
+
+
+- - - - - - FRONTEND - - - - - -
+
+Para crear el entorno de ReactJS
+
+Ir al directorio principal del proyecto e introducir el comando
+
+$ npx create-react-app frontend
