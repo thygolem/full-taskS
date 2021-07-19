@@ -1,11 +1,3 @@
-En linux:
-$ lsb_release -a
-No LSB modules are available.
-Distributor ID:	Ubuntu
-Description:	Ubuntu 20.04.2 LTS
-Release:	20.04
-Codename:	focal
-
 
 Basado en el tutorial de FaztWeb
 https://www.youtube.com/watch?v=D1W8H4Rkb9A
@@ -25,7 +17,9 @@ $ git reset --hard [código_del_commit]
 - - - - - - BACKEND - - - - - -
 
 Para probar la API de FLASK, usamos POSTMAN:
+cuando accedemos a la dirección http://localhost:5000/users desde navegador, vamos a observar que tenemos el archivo JSON liso para ser consumido por cualqueir cliente
 
+Para manejar al principio las 5 peticiones de HTTP, vamos ausar postman:
 ejemplo1:
 [POST]
 http://localhost:5000/users

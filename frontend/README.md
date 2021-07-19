@@ -1,3 +1,20 @@
+# $ npm start
+
+# El framework ReactJS es nuevo para mi, pero entiendo la mecánica ya que he usado con anterioridad VueJS y recientemente NuxtJS
+
+FAZT está usando jsx en vez de HTML con código de bootstrap (https://getbootstrap.com/docs/5.0/components/navbar/)
+
+Hacemos la conversión HTML -> JSX en la página https://magic.reactjs.net/htmltojsx.htm
+https://www.youtube.com/watch?v=D1W8H4Rkb9A&t=2396s : min 39
+
+localhost:3001/navbar - - Navbar.js
+
+En index.js para importar bootstrap, fijarse bien en la ruta real, en mi caso:
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+# Las variables de entorno deben alojarse en .env en el directorio principal del frontend y cada variable para React, deben empezar por "REACT_APP_", ejemplo "REACT_APP_URI=xxxxxxxx"
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
