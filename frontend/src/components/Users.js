@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+// useEffect nos permite volver a ejecutar código una vez renderizado el componente 
+
 
 const API = process.env.REACT_APP_API; // Recojemos la variable de entorno y le asignamos un nombre
 
@@ -7,12 +9,13 @@ export const Users = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [editing, setEditing] = useState(false);
-  const [id, setId] = useState("");
+  const [editing, setEditing] = useState(false); //Definimos un estado diferente para el formulario cuando estamos editando un Objeto(Usuario)
+  const [id, setId] = useState(""); // 1:27:00  recoger el _id
 
   const nameInput = useRef(null);
 
-  let [users, setUsers] = useState([]);
+  let [users, setUsers] = useState([]); // Mostrar los usuarios min 1:08:30.
+  // Array vacio! para poder mostrar lo que recibimos
 
   const handleSubmit = async (e) => {
         // Es un método asíncrono, con lo que el navegador no se queda bloqueado cuando envía la petición. Lo hace en segundo plano. VER TUTORIAL DE ASYNC AWAIT !!!
@@ -35,7 +38,7 @@ export const Users = () => {
         }),
       });
       await res.json();
-    } else {
+    } else { // En caso de estar editando !
       const res = await fetch(`${API}/users/${id}`, {
         method: "PUT",
         headers: {
@@ -49,14 +52,14 @@ export const Users = () => {
       });
       const data = await res.json();
       console.log(data);
-      setEditing(false);
-      setId("");
+      setEditing(false); // Para 'resetar' el estado de edición a creación 
+      setId(""); // Para limpiar el formulario después de haber modificado el objeto(usuario)
     }
-    await getUsers();
+    await getUsers(); // Llama a la función de obtener los datos para que se actualice la tabla.
 
-    setName("");
-    setEmail("");
-    setPassword("");
+    setName(""); // Para limpiar el formulario después de haber creado un objeto(usuario)
+    setEmail(""); // Para limpiar el formulario después de haber creado un objeto(usuario)
+    setPassword(""); // Para limpiar el formulario después de haber creado un objeto(usuario)
     nameInput.current.focus();
   };
 
@@ -75,15 +78,16 @@ export const Users = () => {
       });
       const data = await res.json();
       console.log(data);
-      await getUsers();
+      await getUsers(); // Llama a la función de obtener los datos para que se actualice la tabla.
+      //React estará comparando la información
     }
   };
 
   const editUser = async (id) => {
-    const res = await fetch(`${API}/users/${id}`);
+    const res = await fetch(`${API}/user/${id}`);
     const data = await res.json();
 
-    setEditing(true);
+    setEditing(true); // Alteramos el estado de la variable que hemos creado para poder editar en el formulario
     setId(id);
 
     // Reset
@@ -96,10 +100,11 @@ export const Users = () => {
   useEffect(() => {
     getUsers();
   }, []);
+  // Sustituye a didMount
 
   return (
     <div className="row">
-      <div className="col-md-4">
+      <div className="col-md-4"> {/* este div ocupa 4 columnas  */} 
         <form onSubmit={handleSubmit} className="card card-body">
           <div className="form-group">
             <input
@@ -131,12 +136,13 @@ export const Users = () => {
             />
           </div>
           <button className="btn btn-primary btn-block">
-            {editing ? "Update" : "Create"}
+            {editing ? "Update" : "Create"} 
+            {/**Estamos cambiando el texto en función del estado del formulario. (? Verdadero : Falso )*/}
           </button>
         </form>
       </div>
       <div className="col-md-6">
-        <table className="table table-striped">
+        <table className="table table-striped"> {/* striped nos muestra la tabla con colores alternados */ }
           <thead>
             <tr>
               <th>Name</th>
@@ -147,7 +153,8 @@ export const Users = () => {
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user._id}>
+              // Recorrer cada uno de los usuarios
+              <tr key={user._id}> {/**cada _id por regla es único y debe reflejarse por cada tr */}
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.password}</td>
@@ -166,6 +173,7 @@ export const Users = () => {
                   </button>
                 </td>
               </tr>
+              // Recorrer cada uno de los usuarios
             ))}
           </tbody>
         </table>
