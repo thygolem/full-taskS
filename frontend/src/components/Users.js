@@ -8,6 +8,9 @@ export const Users = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [lat, setLat] = useState("");
+  const [long, setLong] = useState("");
+
 
   const [editing, setEditing] = useState(false); //Definimos un estado diferente para el formulario cuando estamos editando un Objeto(Usuario)
   const [id, setId] = useState(""); // 1:27:00  recoger el _id
@@ -35,6 +38,8 @@ export const Users = () => {
           name,
           email,
           password,
+          lat,
+          long,
         }),
       });
       await res.json();
@@ -48,6 +53,8 @@ export const Users = () => {
           name,
           email,
           password,
+          lat,
+          long
         }),
       });
       const data = await res.json();
@@ -60,6 +67,8 @@ export const Users = () => {
     setName(""); // Para limpiar el formulario después de haber creado un objeto(usuario)
     setEmail(""); // Para limpiar el formulario después de haber creado un objeto(usuario)
     setPassword(""); // Para limpiar el formulario después de haber creado un objeto(usuario)
+    setLat(""); // Para limpiar el formulario después de haber creado un objeto(usuario)
+    setLong(""); // Para limpiar el formulario después de haber creado un objeto(usuario)
     nameInput.current.focus();
   };
 
@@ -94,6 +103,8 @@ export const Users = () => {
     setName(data.name);
     setEmail(data.email);
     setPassword(data.password);
+    setLat(data.password);
+    setLong(data.password);
     nameInput.current.focus();
   };
 
@@ -135,6 +146,24 @@ export const Users = () => {
               placeholder="User's Password"
             />
           </div>
+          <div className="form-group">
+            <input
+              type="lat"
+              onChange={(e) => setLat(e.target.value)}
+              value={lat}
+              className="form-control"
+              placeholder="User's Latitude"
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="long"
+              onChange={(e) => setLong(e.target.value)}
+              value={long}
+              className="form-control"
+              placeholder="User's Longitude"
+            />
+          </div>
           <button className="btn btn-primary btn-block">
             {editing ? "Update" : "Create"} 
             {/**Estamos cambiando el texto en función del estado del formulario. (? Verdadero : Falso )*/}
@@ -148,6 +177,8 @@ export const Users = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Password</th>
+              <th>Latitude</th>
+              <th>Longitude</th>
               <th>Operations</th>
             </tr>
           </thead>
@@ -158,6 +189,8 @@ export const Users = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.password}</td>
+                <td>{user.lat}</td>
+                <td>{user.long}</td>
                 <td>
                   <button
                     className="btn btn-secondary btn-sm btn-block"

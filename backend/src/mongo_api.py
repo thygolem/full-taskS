@@ -16,14 +16,22 @@ CORS(app)
 #creación de collección
 db = mongo.db.users
 
-# Rutas HTTP
+@app.route('/')
+def index():
+    return '<h1>HOLA</h1><a href="http://localhost:5000/users">USERS API</a>'
+
+
+# 5 Rutas HTTP
 @app.route('/users', methods=['POST'])
 def createUser():
   print(request.json)
   id = db.insert({
     'name': request.json['name'],
     'email': request.json['email'],
-    'password': request.json['password']
+    'password': request.json['password'],
+    'lat': request.json['lat'],
+    'long': request.json['long'],
+    'mac': request.json['mac']
   })
   return jsonify(str(ObjectId(id)))
 
@@ -36,7 +44,10 @@ def getUsers():
             '_id': str(ObjectId(doc['_id'])),
             'name': doc['name'],
             'email': doc['email'],
-            'password': doc['password']
+            'password': doc['password'],
+            'lat': doc['lat'],
+            'long': doc['long'],
+            'mac': doc['mac']
             })
     return jsonify(users)
 
@@ -49,7 +60,10 @@ def getUser(id):
       '_id': str(ObjectId(user['_id'])),
       'name': user['name'],
       'email': user['email'],
-      'password': user['password']
+      'password': user['password'],
+      'lat': user['lat'],
+      'long': user['long'],
+      'mac': user['mac']
     })
 
 
@@ -71,7 +85,10 @@ def updateUser(id):
     db.update_one({'_id': ObjectId(id)}, {'$set': {
         'name': request.json['name'],
         'email': request.json['email'],
-        'password': request.json['password']
+        'password': request.json['password'],
+        'lat': request.json['lat'],
+        'long': request.json['long'],
+        'mac': request.json['mac']
     }})
     return jsonify({'msg': 'USUARIO ACTUALIZADO'})
 
